@@ -1,48 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Sort Without Articles</title>
-  </head>
-  <body>
-    <style>
-      body {
-        margin: 0;
-        font-family: sans-serif;
-        background: url('https://source.unsplash.com/nDqA4d5NL0k/2000x2000');
-        background-size: cover;
-        display: flex;
-        align-items: center;
-        min-height: 100vh;
-      }
+<html>
+<head>
+  <title>Sorted Band Names</title>
+</head>
+<body>
+  <ul id="band"></ul>
 
-      #bands {
-        list-style: inside square;
-        font-size: 20px;
-        background: white;
-        width: 500px;
-        margin: auto;
-        padding: 0;
-        box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
-      }
+  <script>
+    let bandNames = ['The Rolling Stones', 'Led Zeppelin', 'Aerosmith', 'The Beatles', 'Pink Floyd', 'Queen'];
 
-      #bands li {
-        border-bottom: 1px solid #efefef;
-        padding: 20px;
-      }
+    // Function to remove articles from the band name
+    function removeArticles(name) {
+      const articles = ['a', 'an', 'the'];
+      const words = name.split(' ');
+      return words.filter(word => !articles.includes(word.toLowerCase())).join(' ');
+    }
 
-      #bands li:last-child {
-        border-bottom: 0;
-      }
+    // Sorting the band names in lexicographic order (excluding articles)
+    bandNames.sort((a, b) => removeArticles(a).localeCompare(removeArticles(b)));
 
-      a {
-        color: #ffc600;
-        text-decoration: none;
-      }
-    </style>
-
-    <ul> id="band"</ul>
-
-    <script type="text/javascript" src="./script.js"></script>
-  </body>
+    // Displaying the sorted band names in the 'ul' element with 'id='band''
+    const ulElement = document.getElementById('band');
+    bandNames.forEach(name => {
+      const liElement = document.createElement('li');
+      liElement.textContent = name;
+      ulElement.appendChild(liElement);
+    });
+  </script>
+</body>
 </html>
+
